@@ -1,16 +1,13 @@
 #pragma once
 /**
  * @file Deque.h
- * @brief Dynamically alocated implementation of Deque ,
- * (Double linked queue that both front and rear can be enqueued
- * and dequeued , being able to both FIFO and LIFO )
- * 
- * Provides all the basic operations of a Deque , adding new elements (Enqueue)
- * removing elements (Dequeue) but both ways , printing the list and displaying 
- * certain elements of the list.
- * 
- * Author:  Giorgos Apostolakis
- * Date:    10/22/2025
+ * @brief Dynamically allocated implementation of a deque
+ * (a doubly linked queue whose front and rear can both be enqueued
+ * and dequeued, supporting both FIFO and LIFO usage).
+ *
+ * Provides all the basic operations of a deque: adding new elements (enqueue),
+ * removing elements (dequeue) from either end, printing the list, and inspecting
+ * elements of the list.
  */
 
 #include <stdbool.h>

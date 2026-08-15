@@ -77,10 +77,10 @@ int Queue_Enqueue(Queue **queue, int value)
     return 1;
 }
 
-void* Queue_Dequeue(Queue **queue)
+int Queue_Dequeue(Queue **queue)
 {
     Node *toFree;
-    void* returnValue;
+    int returnValue;
     if (!queue)
     {
         fprintf(stderr, "Queue_Dequeue: Double pointer cannot be NULL\n");
@@ -108,7 +108,7 @@ void* Queue_Dequeue(Queue **queue)
     return returnValue;
 }
 
-void* Queue_Peek(const Queue *queue){
+int Queue_Peek(const Queue *queue){
     if (!queue)
     {
         fprintf(stderr, "Queue_Peek: Queue cannot be NULL\n");

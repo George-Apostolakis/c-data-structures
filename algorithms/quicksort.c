@@ -2,8 +2,7 @@
 
 /**
  * @file    quicksort.c
- * @brief   Implementations of QuickSort Algorithm (Fixed types)
- * @author  Apostolakis Giorgos
+ * @brief   Implementations of QuickSort Algorithm
  */
 
 static void ArrayPrint(int *array, int arraySize)
@@ -49,7 +48,11 @@ static int Partition(int *array, int lowIndex, int highIndex)
 }
 
 /**
- * 
+ * @brief Sorts array[low..high] in place using the QuickSort algorithm.
+ * @param array Array to sort.
+ * @param low Lower bound index (inclusive).
+ * @param high Upper bound index (inclusive).
+ * @param numberOfCalls Counter incremented once per recursive call, for tracking call depth.
  */
 void Quicksort(int *array, int low, int high , int* numberOfCalls)
 {

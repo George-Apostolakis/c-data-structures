@@ -1,6 +1,11 @@
 #include "../headers/linkedList.h"
-#include <stdlib.h> // for NUll
+#include <stdlib.h> // for NULL
 #include <stdio.h>
+
+/**
+ * @file linkedList.c
+ * @brief Implementation of linkedList.h functions
+ */
 
 struct Node
 {
@@ -33,6 +38,7 @@ int LinkedList_CreateEmpty(List **list)
     (*list)->head = NULL;
     (*list)->tail = NULL;
     (*list)->size = 0;
+    return 1;
 }
 
 int LinkedList_AddToEnd(List **list, int value)
@@ -180,7 +186,7 @@ int LinkedList_Search(const List *list, int value)
         fprintf(stderr, "LinkedList_Search: ERROR list is NULL\n");
         return LINKEDLIST_NULL;
     }
-    // CASE1: Empty list
+    // Case 1: Empty list
     if (list->size == 0)
     {
         fprintf(stderr, "LinkedList_Search: ERROR list EMPTY\n");
@@ -220,10 +226,10 @@ int LinkedList_RemoveNode(List **list, int search)
     }
     if ((index = LinkedList_Search(*list, search)) != LINKEDLIST_NOTFOUND)
     {
-        // case 1 : remove first
+        // Case 1: Remove first
         if (index == 0)
             return LinkedList_RemoveFirst(list);
-        // case 2 : remove last
+        // Case 2: Remove last
         if (index == (*list)->size - 1)
             return LinkedList_RemoveLast(list);
 
@@ -268,13 +274,13 @@ int LinkedList_RemoveLast(List **list)
         fprintf(stderr, "LinkedList_RemoveLast: ERROR list is NULL\n");
         return LINKEDLIST_NULL;
     }
-    // CASE1: Empty list
+    // Case 1: Empty list
     if ((*list)->size == 0)
     {
         fprintf(stderr, "LinkedList_RemoveLast: ERROR list EMPTY\n");
         return LINKEDLIST_EMPTY;
     }
-    // CASE2: 1 Node (head == tail)
+    // Case 2: Single node (head == tail)
     if ((*list)->size == 1)
     {
         free_node = (*list)->head;
@@ -286,7 +292,7 @@ int LinkedList_RemoveLast(List **list)
         return return_value;
     }
 
-    // CASE3: >1 Node
+    // Case 3: More than one node
     tmp = (*list)->head;
     while (tmp->next != (*list)->tail)
     {
@@ -307,7 +313,7 @@ int LinkedList_RemoveFirst(List **list)
 {
     Node *toBeFreed;
     int return_value;
-    // CASE1: NULL LIST
+    // Case 1: NULL list
     if (!list)
     {
         fprintf(stderr, "LinkedList_RemoveFirst: ERROR double pointer is NULL\n");
@@ -318,7 +324,7 @@ int LinkedList_RemoveFirst(List **list)
         fprintf(stderr, "LinkedList_RemoveFirst: ERROR list is NULL\n");
         return LINKEDLIST_NULL;
     }
-    // CASE2: Empty list
+    // Case 2: Empty list
     if ((*list)->size == 0)
     {
         fprintf(stderr, "LinkedList_RemoveFirst: ERROR list EMPTY\n");
@@ -328,7 +334,7 @@ int LinkedList_RemoveFirst(List **list)
     toBeFreed = (*list)->head;
     (*list)->head = (*list)->head->next;
     free(toBeFreed);
-    // CASE : LIST IS NOW EMPTY
+    // List is now empty
     if ((*list)->head == NULL)
     {
         (*list)->tail = NULL;
@@ -357,10 +363,10 @@ int LinkedList_RemoveIndex(List **list, int index)
         fprintf(stderr, "LinkedList_RemoveIndex: ERROR list EMPTY\n");
         return LINKEDLIST_EMPTY;
     }
-    // case 1 : remove first
+    // Case 1: Remove first
     if (index == 0)
         return LinkedList_RemoveFirst(list);
-    // case 2 : remove last
+    // Case 2: Remove last
     if (index == (*list)->size - 1)
         return LinkedList_RemoveLast(list);
 
@@ -398,19 +404,19 @@ void LinkedList_Free(List **list)
 {
     Node *tmp, *toBeFreed;
 
-    // CASE1: NULL LIST
+    // Case 1: NULL list
     if (!list)
         return;
 
     if (!(*list))
         return;
-    // CASE2: Empty list
+    // Case 2: Empty list
     if ((*list)->size == 0)
     {
         fprintf(stderr, "LinkedList_Free: ERROR list EMPTY\n");
         return;
     }
-    // CASE3: NORMAL CASE
+    // Case 3: General case
     tmp = (*list)->head;
     while (tmp != NULL)
     {

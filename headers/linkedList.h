@@ -2,13 +2,10 @@
 
 /**
  * @file linkedList.h
- * @brief Dynamic single linked list implementation in C.
+ * @brief Dynamic singly linked list implementation in C.
  *
  * Provides basic operations for creating, modifying, querying, and freeing
  * linked lists. Designed for educational and general-purpose usage.
- *
- * Author: Giorgos Apostolakis
- * Date: 2025-10-20
  */
 
 /*  --------------------------------------------------------------------------
@@ -67,7 +64,7 @@ int LinkedList_AddToStart(List **list, int value);
 int LinkedList_AddAtIndex(List **list, int value, int index);
 
 /**
- * @brief searches for the value in the list, if it exists the function returns its index
+ * @brief Searches for the value in the list, if it exists the function returns its index
  * @param list a pointer to the list itself
  * @param value the value that will be searched through the list
  * @return returns index of element if process succeeds, Appropriate MACRO if process fails
@@ -75,7 +72,7 @@ int LinkedList_AddAtIndex(List **list, int value, int index);
 int LinkedList_Search(const List *list, int value);
 
 /**
- * @brief searches for the value in the list, if it exists it removes it
+ * @brief Searches for the value in the list, if it exists it removes it
  * @param list a pointer to the list itself
  * @param search the value that will be searched through the list
  * @return returns value of removed node if process succeeds, Appropriate MACRO if process fails
@@ -83,21 +80,21 @@ int LinkedList_Search(const List *list, int value);
 int LinkedList_RemoveNode(List **list, int search);
 
 /**
- * @brief removes the last node of the list
+ * @brief Removes the last node of the list
  * @param list a pointer to the list itself
  * @return returns value of Last node, Appropriate MACRO if process fails
  */
 int LinkedList_RemoveLast(List **list);
 
 /**
- * @brief removes the first node of the list
+ * @brief Removes the first node of the list
  * @param list a pointer to the list itself
  * @return returns value of First node, Appropriate MACRO if process fails
  */
 int LinkedList_RemoveFirst(List **list);
 
 /**
- * @brief removes the node at the specified index of the list
+ * @brief Removes the node at the specified index of the list
  * @param list a pointer to the list itself
  * @param index the index of the node that will be deleted
  * @return returns value of node at index, Appropriate MACRO if process fails
@@ -105,7 +102,7 @@ int LinkedList_RemoveFirst(List **list);
 int LinkedList_RemoveIndex(List **list, int index);
 
 /**
- * @brief Gives the size of the list
+ * @brief Returns the size of the list
  * @param list the list
  * @return an integer equal to the size of the list, Appropriate MACRO if process fails
  */

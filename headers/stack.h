@@ -1,15 +1,13 @@
 #pragma once
 /**
  *  @file stack.h
- *  @brief Dynamic stack implementation in C
+ *  @brief Dynamic stack implementation in C.
  *
  *  Provides functions to initialize, manipulate, inspect, and free stacks.
  *  Designed with dynamic memory management and generic type data.
- * 
- *  Author: Giorgos Apostolakis
- *  Date: 2025-10-21
  */
 #include <stdbool.h>
+#include <stddef.h>
 /*  -------------------------------------------------------------------------- 
                                 STACK MACROS
     -------------------------------------------------------------------------- */
@@ -17,7 +15,7 @@
 #define STACK_NULL              -9998   /**< Null pointer passed as Stack. */
 #define STACK_ALLOCATION_FAILED -9997   /**< Memory Allocation failed */
 
-#define STACK_SUCCESS           1       /**< Operation is successfull */
+#define STACK_SUCCESS           1       /**< Operation was successful */
 
 /**
  * @struct Stack
@@ -26,44 +24,45 @@
 typedef struct Stack Stack;
 
 /**
- * @brief Initialises the stack and allocates the necessary memory
+ * @brief Initializes the stack and allocates the necessary memory
  * @param[out] stack Pointer to the stack
+ * @param[in] elem_size Size in bytes of the elements that will be stored in the stack
  * @return Appropriate MACRO depending the result
  * @note Caller must call Stack_Free() to avoid memory leaks
  */
 int Stack_Init(Stack **stack,size_t elem_size);
 /**
- * @brief Pushes a new node to the top of the stack
+ * @brief Pushes a new value onto the top of the stack
  * @param[in,out] stack Pointer to the stack
- * @param[in] value Value of the new node
+ * @param[in] value Pointer to the value to copy onto the stack
  * @return Appropriate MACRO depending the result
  */
 int Stack_Push(Stack **stack, const void* value);
 /**
- * @brief Pops the top node of the stack ( removes it and returns its value)
+ * @brief Pops the top element off the stack (removes it and copies out its value)
  * @param[in,out] stack Pointer to the stack
- * @param[out] out Value of top element.
+ * @param[out] out Buffer to copy the top element's value into.
  * @return Appropriate MACRO depending on the result.
  */
 int Stack_Pop(Stack **stack,void* out);
 /**
- * @brief returns the value of the top node if a node exists
+ * @brief Returns the value of the top element if one exists
  * @param[in] stack The stack
- * @param[out] out Value of top element
+ * @param[out] out Buffer to copy the top element's value into
  * @return Appropriate MACRO depending the result
  */
 int Stack_Peek(const Stack *stack,void* out);
 /**
- * @brief returns the size of the stack
+ * @brief Returns the size of the stack
  * @param[in] stack The stack
  * @return Size of stack , appropriate MACRO in case of error
  */
 int Stack_GetSize(const Stack *stack);
 
 /**
- * @brief Gives a bool value of the stack being empty or not
+ * @brief Gives a bool value of whether the stack is empty or not
  * @param stack The stack
- * @return true in case the stack is empty , false in case the stack isnt empty
+ * @return true if the stack is empty, false if the stack isn't empty
  */
 bool Stack_IsEmpty(const Stack *stack);
 /**

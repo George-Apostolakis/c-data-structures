@@ -5,6 +5,7 @@
 
 /**
  * @file stack.c
+ * @brief Implementation of stack.h functions
  */
 
 typedef struct Node

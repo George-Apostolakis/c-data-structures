@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+
+/**
+ * @file heap.c
+ * @brief Implementation of heap.h functions
+ */
 
 struct Heap
 {
@@ -34,6 +40,7 @@ int Heap_CreateHeap(Heap **heap, size_t elements_size, Heap_CompareFn compare_fu
         fprintf(stderr, "Heap_CreateHeap: ERROR Memory allocaton failed\n");
         return HEAP_MALLOC_FAILED;
     }
+    (*heap)->elem_size = elements_size;
     (*heap)->compare_fn = compare_function;
     (*heap)->capacity = HEAP_INITIAL_CAPACITY;
     (*heap)->size = 0;
@@ -53,8 +60,8 @@ static int Heap_Grow(Heap *heap)
  * @brief Adds element to the heap.
  * @param[in,out] heap Pointer to the heap.
  * @param[in] element Element that will be added to the heap.
- * @return HEAP_SUCCESS if operation is successfull,
- *         HEAP_NULL or HEAP_MALLOC_FAILED if operation fails
+ * @return HEAP_SUCCESS if the operation is successful,
+ *         HEAP_NULL or HEAP_MALLOC_FAILED if the operation fails
  */
 int Heap_Add(Heap **heap, const void *element)
 {

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 /**
  * @file deque.c
- * @brief implementation of deque.h functions
+ * @brief Implementation of deque.h functions
  */
 #define DEQUE_VALIDATE(ptr, ret_val)                    \
     do                                                  \

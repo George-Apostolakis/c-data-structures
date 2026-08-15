@@ -1,22 +1,23 @@
 /**
  * @file 1_ab_binary_search.c
- * @brief First Algorithm of Abdul Bari on Algorithms and Complexity Course, this file
- * is an implementation of binary search algorithm.
+ * @brief Implementation of the binary search algorithm, based on Abdul Bari's
+ * Algorithms and Complexity course.
  */
 
 /**
- * How binary search work :
+ * How binary search works:
  * (Divide and conquer strategy)
- * 
+ *
  * Requirements:
- *      - Array A n size allready sorted.
- * 
+ *      - Array A of size n, already sorted.
+ *
  * Steps:
- *      - we keep l (low) h(high) and m (middle) indexes, they start l=1 ,h= n m=(l+h)/2
- *      - At each step we compare A[m] with key and we wither find the key or keep the half of the array that makes
- *      sense by moving either the low = middle+1 or high = middle-1 ,after we recalculate m.
- *      - we exit when h<l.
- * 
+ *      - We keep l (low), h (high), and m (middle) indexes, starting at l=0, h=n, m=(l+h)/2.
+ *      - At each step we compare A[m] with key and either find the key or keep the half
+ *      of the array that makes sense, by moving either low = middle+1 or high = middle-1,
+ *      then recalculating m.
+ *      - We exit when h<l.
+ *
  * Complexity:
  *      best case       O(1)
  *      worst case      O(log(n))
@@ -31,8 +32,8 @@
 int A[10]={1,4,6,7,8,10,13,20,23,24};
 
 /**
- * Implementation Using reccursion
- * User should call using l=0 h=n
+ * Recursive implementation.
+ * Caller should invoke with l=0, h=n.
  */
 int binary_search(int l,int h,int key){
     int m;

@@ -1,16 +1,12 @@
-#ifndef QUEUE_H_GA
-#define QUEUE_H_GA
+#pragma once
 
 /**
- * @file queue.h  
- * @brief Dynamic queue implementation in C
+ * @file queue.h
+ * @brief Dynamic queue implementation in C.
  *
- * Provides all the basic operations of a queue , adding new elements (Enqueue)
- * removing elements (Dequeue) , printing the list and displaying certain elements
- * of the list.
- *
- * Author: Giorgos Apostolakis  
- * Date: 2025-10-21
+ * Provides all the basic operations of a queue: adding new elements (enqueue),
+ * removing elements (dequeue), printing the queue, and inspecting certain
+ * elements of the queue.
  */
 
 #include <stdbool.h>
@@ -89,5 +85,3 @@ void Queue_Print(const Queue *queue);
  * @param[in,out] queue Pointer to the queue , set to NULL after call
  */
 void Queue_Free(Queue **queue);
-
-#endif

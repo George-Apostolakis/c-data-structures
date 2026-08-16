@@ -51,7 +51,8 @@ static int Heap_Grow(Heap *heap)
 {
     int newCapacity = heap->capacity * 2;
     void *newData = realloc(heap->data, newCapacity * heap->elem_size);
-    if (!newData) return HEAP_MALLOC_FAILED;
+    if (!newData)
+        return HEAP_MALLOC_FAILED;
     heap->data = newData;
     heap->capacity = newCapacity;
     return HEAP_SUCCESS;
@@ -172,7 +173,7 @@ int Heap_Remove(Heap **heap, void *out)
     }
 
     Dheap->size--;
-    n = Dheap->size;   /* last original element's index */
+    n = Dheap->size; /* last original element's index */
     memcpy(Dheap->data, (char *)Dheap->data + n * element_size, element_size);
 
     n = 0;
@@ -186,7 +187,9 @@ int Heap_Remove(Heap **heap, void *out)
 
         if (c1_exists && c2_exists)
             chosen = (Dheap->compare_fn((char *)Dheap->data + child1 * element_size,
-                                        (char *)Dheap->data + child2 * element_size) < 0) ? child1 : child2;
+                                        (char *)Dheap->data + child2 * element_size) < 0)
+                         ? child1
+                         : child2;
         else if (c1_exists)
             chosen = child1;
         else if (c2_exists)
@@ -203,4 +206,95 @@ int Heap_Remove(Heap **heap, void *out)
 
     free(tmp);
     return HEAP_SUCCESS;
+}
+
+static int heapify_array(void *array, int i, int array_size, size_t element_size, Heap_CompareFn compare_function, char *tmp)
+{
+    int child1, child2, chosen;
+    bool has_c1, has_c2;
+
+    child1 = 2 * i + 1;
+    child2 = 2 * i + 2;
+
+    has_c1 = child1 < array_size;
+    has_c2 = child2 < array_size;
+
+    if (has_c1 && has_c2)
+        chosen = (compare_function((char *)array + child1 * element_size,
+                                   (char *)array + child2 * element_size) < 0)
+                     ? child1
+                     : child2;
+    else if (has_c1)
+        chosen = child1;
+    else if (has_c2)
+        chosen = child2;
+    else
+        return HEAP_SUCCESS;
+
+    if (compare_function((char *)array + i * element_size, (char *)array + chosen * element_size) < 0)
+        return HEAP_SUCCESS;
+
+    memcpy(tmp, (char *)array + i * element_size, element_size);
+    memcpy((char *)array + i * element_size, (char *)array + chosen * element_size, element_size);
+    memcpy((char *)array + chosen * element_size, tmp, element_size);
+
+    return heapify_array(array, chosen, array_size, element_size, compare_function, tmp );
+}
+
+Heap *Heap_Heapify(void *array_to_heap, int array_size, size_t element_size, Heap_CompareFn compare_function)
+{
+    Heap *ret_heap;
+    int i;
+    char *array, *tmp;
+
+    if (!array_to_heap || array_size <= 0)
+    {
+        fprintf(stderr, "Heap_Heapify: ERROR invalid input\n");
+        return NULL;
+    }
+
+    array = malloc(array_size * element_size);
+    if (!array)
+    {
+        fprintf(stderr, "Heap_Heapify: ERROR Memory allocaton failed\n");
+        return NULL;
+    }
+
+    memcpy(array, array_to_heap, array_size * element_size);
+
+    ret_heap = (Heap *)malloc(sizeof(Heap));
+    if (!ret_heap)
+    {
+        fprintf(stderr, "Heap_Heapify: ERROR Memory allocaton failed\n");
+        free(array);
+        return NULL;
+    }
+
+    (ret_heap)->elem_size = element_size;
+    (ret_heap)->compare_fn = compare_function;
+    (ret_heap)->capacity = array_size;
+    (ret_heap)->size = array_size;
+
+    tmp = malloc(element_size);
+    if (!tmp)
+    {
+        free(ret_heap);
+        free(array);
+        fprintf(stderr, "Heap_Heapify: ERROR Malloc failed\n");
+        return NULL;
+    }
+    // start from first parent (i - 1) / 2
+    for (i = (array_size - 2) / 2; i >= 0; i--)
+        if (heapify_array(array, i, array_size, element_size, compare_function, tmp) != HEAP_SUCCESS)
+        {
+            free(ret_heap);
+            free(array);
+            free(tmp);
+            fprintf(stderr, "Heap_Heapify: ERROR Malloc failed\n");
+            return NULL;
+        }
+
+    free(tmp);
+    ret_heap->data = array;
+    return ret_heap;
 }

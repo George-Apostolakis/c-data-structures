@@ -67,5 +67,6 @@ int Heap_Remove(Heap **heap, void *out);
  * @param[in] elements_size Size of elements that will be saved inside the heap.
  * @param[in] compare_function Function that decides which of 2 elements is bigger.
  * @return Pointer to the created heap.
+ * @note Time Complixity O(n)
  */
 Heap *Heap_Heapify(void *array_to_heap,int array_size, size_t element_size, Heap_CompareFn compare_function);
